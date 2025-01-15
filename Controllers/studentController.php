@@ -16,4 +16,10 @@ class studentController extends BaseController
         $teachers = $this->studentModel->getAllTeachers();
         $this->render("courses", ["courses" => $courses, "teachers" => $teachers]);
     }
+    public function myCourses()
+    {
+        $id = $_SESSION["user"]["id"];
+        $allMyCourses = $this->studentModel->getAllMyCourses($id);
+        $this->render("student/studentCourses", ["courses" => $allMyCourses]);
+    }
 }

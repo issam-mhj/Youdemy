@@ -15,7 +15,7 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <a href="#" class="text-2xl font-bold text-blue-600">Youdemy</a>
+                    <a href="/" class="text-2xl font-bold text-blue-600">Youdemy</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
@@ -32,9 +32,9 @@
                         </a>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['user'])): ?>
-                        <a href="/"
+                        <a href="/mycourses"
                             class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                            MyProfile
+                            MyCourses
                         </a>
                     <?php endif; ?>
 

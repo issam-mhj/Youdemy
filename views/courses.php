@@ -45,7 +45,7 @@
                             </a>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user'])): ?>
-                            <a href="#" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+                            <a href="/enrolled" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
                                 Enroll
                             </a>
                         <?php endif; ?>

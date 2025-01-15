@@ -22,4 +22,11 @@ class Student extends Db
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllMyCourses($id)
+    {
+        $query = "SELECT * FROM enrollments JOIN courses WHERE enrollments.student_id=? AND enrollments.course_id= courses.id ";
+        $myBooks = $this->conn->prepare($query);
+        $myBooks->execute([$id]);
+        return $myBooks->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
