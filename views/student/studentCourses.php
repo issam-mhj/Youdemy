@@ -44,10 +44,10 @@
 
                     <!-- Content Container -->
                     <div class="p-6">
-                        <a href="/book/details?id=<?= $course['id'] ?>"
+                        <a href="/mycourses/details?id=<?= $course['id'] ?>"
                             class="block group-hover:text-blue-600 transition-colors duration-300">
                             <h2 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
-                                <?= htmlspecialchars($course['title']) ?>
+                                <?= $course['title'] ?>
                             </h2>
                         </a>
 
@@ -64,7 +64,7 @@
                                 <span>Enrolled <?= date('M j, Y', strtotime($course['created_at'])) ?></span>
                             </div>
 
-                            <a href="/book/details?id=<?= $course['id'] ?>"
+                            <a href="/mycourses/details?id=<?= $course['id'] ?>"
                                 class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800">
                                 Continue
                                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

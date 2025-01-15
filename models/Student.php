@@ -35,4 +35,11 @@ class Student extends Db
         $courses = $this->conn->prepare($query);
         return $courses->execute([$idStudent, $idCourse]);
     }
+    public function getCourseData($idCourse)
+    {
+        $query = "SELECT * FROM courses JOIN users WHERE courses.id=? AND courses.teacher_id=users.id";
+        $course = $this->conn->prepare($query);
+        $course->execute([$idCourse]);
+        return $course->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

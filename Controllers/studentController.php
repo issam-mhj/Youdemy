@@ -31,4 +31,10 @@ class studentController extends BaseController
         $this->studentModel->enrolled($idStudent, $idCourse);
         header("location:/");
     }
+    public function courseDetails()
+    {
+        $idCourse = $_GET['id'];
+        $course = $this->studentModel->getCourseData($idCourse);
+        $this->render("student/courseDetails", ["course" => $course]);
+    }
 }
