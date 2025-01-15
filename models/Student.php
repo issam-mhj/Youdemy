@@ -29,4 +29,10 @@ class Student extends Db
         $myBooks->execute([$id]);
         return $myBooks->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function enrolled($idStudent, $idCourse)
+    {
+        $query = "INSERT INTO enrollments(student_id,course_id) VALUES(?,?)";
+        $courses = $this->conn->prepare($query);
+        return $courses->execute([$idStudent, $idCourse]);
+    }
 }

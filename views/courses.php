@@ -45,9 +45,22 @@
                             </a>
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user'])): ?>
-                            <a href="/enrolled" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
-                                Enroll
-                            </a>
+                            <?php
+                            $isEnrolled = false;
+                            foreach ($myCourses as $mycourse) {
+                                if ($mycourse["course_id"] == $course["id"]) {
+                                    $isEnrolled = true;
+                                    break;
+                                }
+                            }
+
+                            if ($isEnrolled) {
+                                echo '<div class="px-4 py-2 bg-green-600 text-white font-bold rounded-lg transition">Enrolled</div>';
+                            } else {
+                                echo '<a href="/enrolled?id=' . $course["id"] . '" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg transition">Enroll</a>';
+                            }
+                            ?>
+
                         <?php endif; ?>
                     </div>
                 </div>
