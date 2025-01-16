@@ -43,4 +43,7 @@ class Teacher extends Db
         $time->execute();
         return $time->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function studentsInCourse(){
+        // $query = "SELECT "
+    }
 }

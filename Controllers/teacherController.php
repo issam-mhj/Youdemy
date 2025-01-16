@@ -18,7 +18,17 @@ class teacherController extends BaseController
         $allStudents = $this->teacherModel->studentNum();
         $courses = $this->teacherModel->allCourses();
         $timeDifference = $this->teacherModel->courseTimePassed();
-        $this->render("teacher/dashboardTeacher", ["teachers" => $teacher, "NumCourse" => $allCourses,
-        "NumStudent" => $allStudents, "allCourses" => $courses,"timeDifference"=>$timeDifference]);
+        $studentsInCourse = $this->teacherModel->studentsInCourse();
+        $this->render("teacher/dashboardTeacher", [
+            "teachers" => $teacher,
+            "NumCourse" => $allCourses,
+            "NumStudent" => $allStudents,
+            "allCourses" => $courses,
+            "timeDifference" => $timeDifference
+        ]);
+    }
+    public function showCourses()
+    {
+        $this->render("teacher/myCourses");
     }
 }

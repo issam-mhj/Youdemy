@@ -29,6 +29,7 @@ class studentController extends BaseController
         $idCourse = $_GET['id'];
         $idStudent = $_SESSION["user"]["id"];
         $this->studentModel->enrolled($idStudent, $idCourse);
+        $this->studentModel->studentsEnroll($idCourse);
         header("location:/");
     }
     public function courseDetails()

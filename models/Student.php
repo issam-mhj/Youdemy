@@ -35,6 +35,12 @@ class Student extends Db
         $courses = $this->conn->prepare($query);
         return $courses->execute([$idStudent, $idCourse]);
     }
+    public function studentsEnroll($idCourse)
+    {
+        $query = "UPDATE courses SET studentsNumber = studentsNumber + 1 WHERE courses.id = ?";
+        $courses = $this->conn->prepare($query);
+        return $courses->execute([$idCourse]);
+    }
     public function getCourseData($idCourse)
     {
         $query = "SELECT * FROM courses JOIN users WHERE courses.id=? AND courses.teacher_id=users.id";
