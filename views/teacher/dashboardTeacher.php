@@ -67,34 +67,29 @@
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-6">
             <!-- Stats Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex items-center justify-between">
                         <h3 class="text-gray-500 text-sm">Total Courses</h3>
                         <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">+</span>
                     </div>
-                    <p class="text-3xl font-bold mt-2">24</p>
+                    <p class="text-3xl font-bold mt-2"> <?= $NumCourse["num"] ?> </p>
                 </div>
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex items-center justify-between">
                         <h3 class="text-gray-500 text-sm">Total Students</h3>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">+8%</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">+</span>
                     </div>
-                    <p class="text-3xl font-bold mt-2">1,240</p>
+                    <p class="text-3xl font-bold mt-2"><?= $NumStudent["num"] ?></p>
                 </div>
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-gray-500 text-sm">Average Rating</h3>
-                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">4.8</span>
-                    </div>
-                    <p class="text-3xl font-bold mt-2">4.8</p>
-                </div>
+
             </div>
 
             <!-- Recent Courses -->
             <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-semibold">Recent Courses</h3>
+                    <h3 class="text-lg font-semibold">Recent Courses
+                    </h3>
                     <a href="#" class="text-blue-600 hover:text-blue-800">View All</a>
                 </div>
                 <div class="overflow-x-auto">
@@ -105,37 +100,38 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Students</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rating</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <img src="/api/placeholder/40/40" alt="Course" class="w-10 h-10 rounded-lg mr-3">
-                                        <div>
-                                            <div class="font-medium">Web Development Basics</div>
-                                            <div class="text-sm text-gray-500">Updated 2 days ago</div>
+                            <?php foreach ($allCourses as $crs): ?>
+                                <tr>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center">
+                                            <div>
+                                                <div class="font-medium"><?= $crs["title"] ?></div>
+                                                <?php
+                                                foreach ($timeDifference as $time) {
+                                                    if ($time['id'] == $crs['id']) {
+                                                        echo '<div class="text-sm text-gray-500">Updated ' . $time['diff'] . ' hour ago</div>';
+                                                    }
+                                                }
+
+                                                ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">Development</td>
-                                <td class="px-6 py-4">234</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <span class="ml-1">4.8</span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex space-x-3">
-                                        <button class="text-blue-600 hover:text-blue-800">Edit</button>
-                                        <button class="text-red-600 hover:text-red-800">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="px-6 py-4"><?= $crs["category"] ?></td>
+                                    <td class="px-6 py-4">234</td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center">
+                                            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                            <span class="ml-1">?</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>

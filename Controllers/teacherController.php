@@ -15,6 +15,10 @@ class teacherController extends BaseController
         $id = $_SESSION["user"]["id"];
         $teacher = $this->teacherModel->teacherInfo($id);
         $allCourses = $this->teacherModel->coursesNum();
-        $this->render("teacher/dashboardTeacher", ["teachers" => $teacher]);
+        $allStudents = $this->teacherModel->studentNum();
+        $courses = $this->teacherModel->allCourses();
+        $timeDifference = $this->teacherModel->courseTimePassed();
+        $this->render("teacher/dashboardTeacher", ["teachers" => $teacher, "NumCourse" => $allCourses,
+        "NumStudent" => $allStudents, "allCourses" => $courses,"timeDifference"=>$timeDifference]);
     }
 }
