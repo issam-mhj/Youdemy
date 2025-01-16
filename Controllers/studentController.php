@@ -14,6 +14,27 @@ class studentController extends BaseController
     {
         $courses = $this->studentModel->getAllCourses();
         $teachers = $this->studentModel->getAllTeachers();
-        $this->render("courses", ["courses" => $courses, "teachers" => $teachers]);
+        $id = $_SESSION["user"]["id"];
+        $allMyCourses = $this->studentModel->getAllMyCourses($id);
+        $this->render("courses", ["courses" => $courses, "teachers" => $teachers, "myCourses" => $allMyCourses]);
+    }
+    public function myCourses()
+    {
+        $id = $_SESSION["user"]["id"];
+        $allMyCourses = $this->studentModel->getAllMyCourses($id);
+        $this->render("student/studentCourses", ["courses" => $allMyCourses]);
+    }
+    public function enrolled()
+    {
+        $idCourse = $_GET['id'];
+        $idStudent = $_SESSION["user"]["id"];
+        $this->studentModel->enrolled($idStudent, $idCourse);
+        header("location:/");
+    }
+    public function courseDetails()
+    {
+        $idCourse = $_GET['id'];
+        $course = $this->studentModel->getCourseData($idCourse);
+        $this->render("student/courseDetails", ["course" => $course]);
     }
 }

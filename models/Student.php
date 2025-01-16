@@ -22,4 +22,24 @@ class Student extends Db
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllMyCourses($id)
+    {
+        $query = "SELECT * FROM enrollments JOIN courses WHERE enrollments.student_id=? AND enrollments.course_id= courses.id ";
+        $myBooks = $this->conn->prepare($query);
+        $myBooks->execute([$id]);
+        return $myBooks->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function enrolled($idStudent, $idCourse)
+    {
+        $query = "INSERT INTO enrollments(student_id,course_id) VALUES(?,?)";
+        $courses = $this->conn->prepare($query);
+        return $courses->execute([$idStudent, $idCourse]);
+    }
+    public function getCourseData($idCourse)
+    {
+        $query = "SELECT * FROM courses JOIN users WHERE courses.id=? AND courses.teacher_id=users.id";
+        $course = $this->conn->prepare($query);
+        $course->execute([$idCourse]);
+        return $course->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

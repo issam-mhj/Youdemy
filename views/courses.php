@@ -38,7 +38,30 @@
                                                             }
                                                         }
                                                         ?></span>
-                        <span class="text-blue-600 font-bold">Gratuit</span>
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <a href="/login"
+                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                                sign in to enroll
+                            </a>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <?php
+                            $isEnrolled = false;
+                            foreach ($myCourses as $mycourse) {
+                                if ($mycourse["course_id"] == $course["id"]) {
+                                    $isEnrolled = true;
+                                    break;
+                                }
+                            }
+
+                            if ($isEnrolled) {
+                                echo '<div class="px-4 py-2 bg-green-600 text-white font-bold rounded-lg transition">Enrolled</div>';
+                            } else {
+                                echo '<a href="/enrolled?id=' . $course["id"] . '" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg transition">Enroll</a>';
+                            }
+                            ?>
+
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

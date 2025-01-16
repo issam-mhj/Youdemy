@@ -27,6 +27,9 @@ Route::get('/register', [Authcontroller::class, 'showRegister']);
 Route::get('/login', [Authcontroller::class, 'showLogin']);
 Route::post('/register/signup', [Authcontroller::class, 'register']);
 Route::post('/login/signin', [Authcontroller::class, 'login']);
+Route::get('/mycourses', [studentController::class, 'myCourses']);
+Route::get('/enrolled', [studentController::class, 'enrolled']);
+Route::get('/mycourses/details', [studentController::class, 'courseDetails']);
 
 
 
