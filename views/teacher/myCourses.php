@@ -91,7 +91,7 @@
                     <h2 class="text-xl font-semibold">My Courses</h2>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button
+                    <a href="mycourses/addNewCourse"
                         class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
                         <svg
                             class="w-5 h-5 mr-2"
@@ -105,7 +105,7 @@
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
                         Add New Course
-                    </button>
+                    </a>
                     <button
                         class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200">
                         <div
@@ -146,57 +146,23 @@
 
             <!-- Course Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Course Card -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                    <div class="relative">
-                        <img
-                            src="/api/placeholder/400/200"
-                            alt="Course thumbnail"
-                            class="w-full h-48 object-cover" />
-                        <span
-                            class="absolute top-4 right-4 bg-green-500 text-white px-2 py-1 rounded-full text-sm">Active</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-lg font-semibold mb-2">
-                            Web Development Basics
-                        </h3>
-                        <div class="flex items-center text-sm text-gray-500 mb-4">
-                            <span class="mr-4">
-                                <svg
-                                    class="w-4 h-4 inline mr-1"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                                45 Students
-                            </span>
-                            <span>
-                                <svg
-                                    class="w-4 h-4 inline mr-1"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                8 Hours
-                            </span>
+                <?php foreach ($myCourses as $course) : ?>
+                    <!-- Course Card -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="relative">
+                            <img
+                                src="/api/placeholder/400/200"
+                                alt="Course thumbnail"
+                                class="w-full h-48 object-cover" />
                         </div>
-                        <div class="flex items-center justify-between">
-                            <span
-                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Web Development</span>
-                            <div class="flex space-x-2">
-                                <button class="p-2 text-gray-500 hover:text-blue-600">
+                        <div class="p-6">
+                            <h3 class="text-lg font-semibold mb-2">
+                                <?= $course['title'] ?>
+                            </h3>
+                            <div class="flex items-center text-sm text-gray-500 mb-4">
+                                <span class="mr-4">
                                     <svg
-                                        class="w-5 h-5"
+                                        class="w-4 h-4 inline mr-1"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -204,12 +170,13 @@
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
                                             stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
-                                </button>
-                                <button class="p-2 text-gray-500 hover:text-red-600">
+                                    <?= $course['studentsNumber'] ?> students
+                                </span>
+                                <span>
                                     <svg
-                                        class="w-5 h-5"
+                                        class="w-4 h-4 inline mr-1"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24">
@@ -217,41 +184,46 @@
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
                                             stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                </button>
+                                    it depends
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span
+                                    class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"> <?= $course['category'] ?> </span>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-gray-500 hover:text-blue-600">
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </button>
+                                    <button class="p-2 text-gray-500 hover:text-red-600">
+                                        <svg
+                                            class="w-5 h-5"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Additional Course Cards (repeated structure) -->
-                <!-- You can duplicate the course card structure above for more courses -->
-            </div>
-
-            <!-- Pagination -->
-            <div class="mt-8 flex justify-center">
-                <nav class="flex space-x-2">
-                    <button
-                        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                        Previous
-                    </button>
-                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg">
-                        1
-                    </button>
-                    <button
-                        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                        2
-                    </button>
-                    <button
-                        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                        3
-                    </button>
-                    <button
-                        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-                        Next
-                    </button>
-                </nav>
+                <?php endforeach ?>
             </div>
         </main>
     </div>

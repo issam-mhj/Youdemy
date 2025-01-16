@@ -29,11 +29,18 @@ class Teacher extends Db
         $number->execute();
         return $number->fetch(PDO::FETCH_ASSOC);
     }
-    public function allCourses()
+    public function threeCourses($id)
     {
-        $query = "SELECT * FROM `courses` ORDER BY `created_at` DESC LIMIT 3";
+        $query = "SELECT * FROM `courses` WHERE `teacher_id` = ? ORDER BY `created_at` DESC LIMIT 3";
         $allCourses = $this->conn->prepare($query);
-        $allCourses->execute();
+        $allCourses->execute([$id]);
+        return $allCourses->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function allCourses($id)
+    {
+        $query = "SELECT * FROM `courses` WHERE `teacher_id` = ? ORDER BY `created_at` DESC";
+        $allCourses = $this->conn->prepare($query);
+        $allCourses->execute([$id]);
         return $allCourses->fetchAll(PDO::FETCH_ASSOC);
     }
     public function courseTimePassed()
@@ -43,7 +50,11 @@ class Teacher extends Db
         $time->execute();
         return $time->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function studentsInCourse(){
-        // $query = "SELECT "
+    public function getAllCategories()
+    {
+        $query = "SELECT * FROM categories";
+        $categories = $this->conn->prepare($query);
+        $categories->execute();
+        return $categories->fetchAll(PDO::FETCH_ASSOC);
     }
 }
