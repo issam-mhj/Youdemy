@@ -23,7 +23,7 @@
                             <div class="h-8 w-px bg-gray-200"></div>
                             <div class="flex flex-col">
                                 <span class="text-gray-600 text-sm">Students</span>
-                                <span class="font-semibold text-gray-900">9,842 enrolled</span>
+                                <span class="font-semibold text-gray-900"><?= $course[0]["studentsNumber"] ?> enrolled</span>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <span class="text-lg font-bold text-gray-900">18 Hours</span>
+                        <span class="text-lg font-bold text-gray-900"><?= $course[0]["duration"] ?></span>
                         <span class="text-sm text-gray-600">Self-paced learning</span>
                     </div>
                 </div>

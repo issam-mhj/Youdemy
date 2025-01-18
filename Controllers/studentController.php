@@ -21,7 +21,7 @@ class studentController extends BaseController
     public function myCourses()
     {
         $id = $_SESSION["user"]["id"];
-        $allMyCourses = $this->studentModel->getAllMyCourses($id);
+        $allMyCourses = $this->studentModel->getMyApprovedCourses($id);
         $this->render("student/studentCourses", ["courses" => $allMyCourses]);
     }
     public function enrolled()

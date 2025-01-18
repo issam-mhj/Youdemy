@@ -29,6 +29,13 @@ class Student extends Db
         $myBooks->execute([$id]);
         return $myBooks->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getMyApprovedCourses($id)
+    {
+        $query = "SELECT * FROM enrollments JOIN courses WHERE enrollments.student_id=? AND enrollments.course_id= courses.id AND enrollments.is_approved = 1 ";
+        $myBooks = $this->conn->prepare($query);
+        $myBooks->execute([$id]);
+        return $myBooks->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function enrolled($idStudent, $idCourse)
     {
         $query = "INSERT INTO enrollments(student_id,course_id) VALUES(?,?)";

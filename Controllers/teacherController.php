@@ -21,13 +21,17 @@ class teacherController extends BaseController
         $id = $_SESSION["user"]["id"];
         $teacher = $this->teacherModel->teacherInfo($id);
         $allCourses = $this->teacherModel->coursesNum();
-        $allStudents = $this->teacherModel->studentNum();
+        $allStudents = $this->teacherModel->studentNum($id);
+        $result = 0;
+        foreach ($allStudents as $students) {
+            $result = $students["num"] + $result;
+        }
         $courses = $this->teacherModel->threeCourses($id);
         $timeDifference = $this->teacherModel->courseTimePassed();
         $this->render("teacher/dashboardTeacher", [
             "teachers" => $teacher,
             "NumCourse" => $allCourses,
-            "NumStudent" => $allStudents,
+            "NumStudent" => $result,
             "allCourses" => $courses,
             "timeDifference" => $timeDifference
         ]);

@@ -22,12 +22,12 @@ class Teacher extends Db
         $number->execute();
         return $number->fetch(PDO::FETCH_ASSOC);
     }
-    public function studentNum()
+    public function studentNum($id)
     {
-        $q = "SELECT count(id) as num FROM users";
+        $q = "SELECT studentsNumber as num FROM courses WHERE courses.teacher_id = ? ";
         $number = $this->conn->prepare($q);
-        $number->execute();
-        return $number->fetch(PDO::FETCH_ASSOC);
+        $number->execute([$id]);
+        return $number->fetchAll(PDO::FETCH_ASSOC);
     }
     public function threeCourses($id)
     {

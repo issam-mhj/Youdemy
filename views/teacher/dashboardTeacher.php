@@ -1,5 +1,4 @@
 <?php require_once "../views/partials/headerAdmin.php" ?>
-
 <div class="flex h-screen">
     <!-- Sidebar -->
     <aside class="w-64 bg-gradient-to-b from-blue-600 via-gray-700 to-gray-900 text-white hidden md:block">
@@ -8,13 +7,13 @@
             <span class="px-2 py-1 text-sm rounded-full">Teacher</span>
         </div>
         <nav class="mt-6">
-            <a href="teacher" class="flex items-center px-6 py-3 bg-blue-700">
+            <a href="/teacher" class="flex items-center px-6 py-3 bg-blue-700">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                 </svg>
                 Dashboard
             </a>
-            <a href="mycourses" class="flex items-center px-6 py-3 hover:bg-blue-700">
+            <a href="/profCourses" class="flex items-center px-6 py-3 hover:bg-blue-700">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
@@ -80,7 +79,7 @@
                         <h3 class="text-gray-500 text-sm">Total Students</h3>
                         <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">+</span>
                     </div>
-                    <p class="text-3xl font-bold mt-2"><?= $NumStudent["num"] ?></p>
+                    <p class="text-3xl font-bold mt-2"><?= $NumStudent ?></p>
                 </div>
 
             </div>

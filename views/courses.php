@@ -46,18 +46,23 @@
                         <?php endif; ?>
                         <?php if (isset($_SESSION['user'])): ?>
                             <?php
-                            $isEnrolled = false;
+                            $isEnrolled = 0;
                             foreach ($myCourses as $mycourse) {
-                                if ($mycourse["course_id"] == $course["id"]) {
-                                    $isEnrolled = true;
+                                if ($mycourse["course_id"] == $course["id"] && $mycourse["is_approved"] === 1) {
+                                    $isEnrolled = 1;
+                                    break;
+                                } elseif ($mycourse["course_id"] == $course["id"] && $mycourse["is_approved"] == 0) {
+                                    $isEnrolled = 2;
                                     break;
                                 }
                             }
 
-                            if ($isEnrolled) {
+                            if ($isEnrolled == 1) {
                                 echo '<div class="px-4 py-2 bg-green-600 text-white font-bold rounded-lg transition">Enrolled</div>';
-                            } else {
+                            } elseif ($isEnrolled == 0) {
                                 echo '<a href="/enrolled?id=' . $course["id"] . '" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg transition">Enroll</a>';
+                            } else {
+                                echo '<a class="px-4 py-2 bg-yellow-600 text-white font-bold rounded-lg transition">pending</a>';
                             }
                             ?>
 
