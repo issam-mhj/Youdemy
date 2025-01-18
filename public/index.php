@@ -38,6 +38,9 @@ Route::get('/teacher', [teacherController::class, 'showDashboard']);
 Route::get('/profCourses', [teacherController::class, 'showCourses']);
 Route::get('/mycourses/addNewCourse', [teacherController::class, 'showAddCourse']);
 Route::post('/mycourses/addNewCourse', [teacherController::class, 'addCourse']);
+Route::get('/managestudents', [teacherController::class, 'showManageStudents']);
+Route::get('/managestudents/accepted', [teacherController::class, 'acceptRequest']);
+Route::get('/managestudents/rejected', [teacherController::class, 'rejectRequest']);
 
 
 
