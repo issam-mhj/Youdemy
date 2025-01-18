@@ -32,7 +32,7 @@
                     <div class="mt-6 lg:mt-0 flex flex-col items-start space-y-4">
                         <div class="bg-blue-50 text-blue-700 px-6 py-3 rounded-lg">
                             <div class="text-sm">Started</div>
-                            <div class="font-semibold">January 15, 2025</div>
+                            <div class="font-semibold"><?= date('M j, Y', strtotime($course[0]['created_at'])) ?></div>
                         </div>
                         <div class="flex items-center space-x-2 text-sm">
                             <span>Included with</span>

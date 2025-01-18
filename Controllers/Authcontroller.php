@@ -56,7 +56,7 @@ class Authcontroller extends BaseController
                     'is_approved' => $isCorrect['is_approved']
                 ];
                 if ($isCorrect["role"] == "Teacher" && $isCorrect["is_approved"] == 1) {
-                    echo "welcome mr teacher";
+                    header("location:/teacher");
                 } else if ($isCorrect["role"] == "Teacher" && $isCorrect["is_approved"] == 0) {
                     echo "you didn't approve yet";
                 } else if ($isCorrect["role"] == "Student") {

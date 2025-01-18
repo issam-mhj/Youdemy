@@ -20,7 +20,7 @@ CREATE TABLE Courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    content TEXT, -- Can be a URL to video or document
+    content TEXT, 
     category VARCHAR(100) NOT NULL,
     teacher_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
