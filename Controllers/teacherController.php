@@ -79,4 +79,18 @@ class teacherController extends BaseController
         $this->teacherModel->rejectRequest($requestId);
         header("location:/managestudents");
     }
+    public function showStats()
+    {
+        $id = $_SESSION["user"]["id"];
+        $allCourses = $this->teacherModel->coursesNum($id);
+        $allStudents = $this->teacherModel->studentNum($id);
+        $myCourses = $this->teacherModel->allCourses($id);
+        $result = 0;
+        foreach ($allStudents as $students) {
+            $result = $students["num"] + $result;
+        }
+        $avrgStudents = $result / $allCourses["num"];
+        $lastEnrolled = $this->teacherModel->getLastEnrolled($id);
+        $this->render("teacher/statistiques", ["num" => $result, "lastEnrolled" => $lastEnrolled, "mycourses" => $myCourses, "avg" => $avrgStudents, "courses" => $allCourses["num"]]);
+    }
 }

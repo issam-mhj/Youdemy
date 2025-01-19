@@ -4,6 +4,7 @@ require_once "../Controllers/Authcontroller.php";
 require_once('../Controllers/BaseController.php');
 require_once('../Controllers/studentController.php');
 require_once('../Controllers/teacherController.php');
+require_once('../Controllers/adminController.php');
 require_once('../models/Admin.php');
 require_once('../models/Student.php');
 require_once('../models/Teacher.php');
@@ -41,6 +42,8 @@ Route::post('/mycourses/addNewCourse', [teacherController::class, 'addCourse']);
 Route::get('/managestudents', [teacherController::class, 'showManageStudents']);
 Route::get('/managestudents/accepted', [teacherController::class, 'acceptRequest']);
 Route::get('/managestudents/rejected', [teacherController::class, 'rejectRequest']);
+Route::get('/statistics', [teacherController::class, 'showStats']);
+Route::get('/admin', [adminController::class, 'dashboard']);
 
 
 

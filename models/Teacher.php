@@ -87,4 +87,13 @@ class Teacher extends Db
         $reject = $this->conn->prepare($query);
         return $reject->execute([$requestId]);
     }
+    public function getLastEnrolled($id)
+    {
+        $query = "SELECT users.name,courses.title,enrollments.enrollment_date FROM enrollments JOIN courses JOIN users
+        WHERE courses.teacher_id = ? AND enrollments.course_id = courses.id AND enrollments.is_approved = 1  AND users.id = enrollments.student_id 
+        ORDER BY enrollments.enrollment_date DESC LIMIT 3";
+        $requests = $this->conn->prepare($query);
+        $requests->execute([$id]);
+        return $requests->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
