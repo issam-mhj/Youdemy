@@ -20,14 +20,18 @@ class teacherController extends BaseController
     {
         $id = $_SESSION["user"]["id"];
         $teacher = $this->teacherModel->teacherInfo($id);
-        $allCourses = $this->teacherModel->coursesNum();
-        $allStudents = $this->teacherModel->studentNum();
+        $allCourses = $this->teacherModel->coursesNum($id);
+        $allStudents = $this->teacherModel->studentNum($id);
+        $result = 0;
+        foreach ($allStudents as $students) {
+            $result = $students["num"] + $result;
+        }
         $courses = $this->teacherModel->threeCourses($id);
         $timeDifference = $this->teacherModel->courseTimePassed();
         $this->render("teacher/dashboardTeacher", [
             "teachers" => $teacher,
             "NumCourse" => $allCourses,
-            "NumStudent" => $allStudents,
+            "NumStudent" => $result,
             "allCourses" => $courses,
             "timeDifference" => $timeDifference
         ]);
@@ -55,5 +59,24 @@ class teacherController extends BaseController
         $duration = strval($duration);
         $this->courseVidModel->addCourse($title, $description, $contentURL, $category, $id, $duration);
         header("location:/mycourses");
+    }
+    public function showManageStudents()
+    {
+        $id = $_SESSION["user"]["id"];
+        $requests = $this->teacherModel->getRequests($id);
+        $enrolled = $this->teacherModel->getEnrolled($id);
+        $this->render("teacher/managestudents", ["requests" => $requests, "enrolled" => $enrolled]);
+    }
+    public function acceptRequest()
+    {
+        $requestId = $_GET["id"];
+        $this->teacherModel->acceptRequest($requestId);
+        header("location:/managestudents");
+    }
+    public function rejectRequest()
+    {
+        $requestId = $_GET["id"];
+        $this->teacherModel->rejectRequest($requestId);
+        header("location:/managestudents");
     }
 }

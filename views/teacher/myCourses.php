@@ -10,7 +10,7 @@
             <span class="px-2 py-1 text-sm rounded-full">Teacher</span>
         </div>
         <nav class="mt-6">
-            <a href="teacher" class="flex items-center px-6 py-3 hover:bg-blue-700">
+            <a href="/teacher" class="flex items-center px-6 py-3 hover:bg-blue-700">
                 <svg
                     class="w-5 h-5 mr-3"
                     fill="none"
@@ -24,7 +24,7 @@
                 </svg>
                 Dashboard
             </a>
-            <a href="#" class="flex items-center px-6 py-3 bg-blue-700">
+            <a href="/profCourses" class="flex items-center px-6 py-3 bg-blue-700">
                 <svg
                     class="w-5 h-5 mr-3"
                     fill="none"
@@ -38,7 +38,7 @@
                 </svg>
                 My Courses
             </a>
-            <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-700">
+            <a href="/managestudents" class="flex items-center px-6 py-3 hover:bg-blue-700">
                 <svg
                     class="w-5 h-5 mr-3"
                     fill="none"
@@ -186,7 +186,7 @@
                                             stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    it depends
+                                    <?= $course['duration'] ?>
                                 </span>
                             </div>
                             <div class="flex items-center justify-between">
