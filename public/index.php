@@ -44,6 +44,15 @@ Route::get('/managestudents/accepted', [teacherController::class, 'acceptRequest
 Route::get('/managestudents/rejected', [teacherController::class, 'rejectRequest']);
 Route::get('/statistics', [teacherController::class, 'showStats']);
 Route::get('/admin', [adminController::class, 'dashboard']);
+Route::get('/admin/manageusers', [adminController::class, 'showManageUsers']);
+Route::get('/admin/manageusers/approved', [adminController::class, 'approvedTeacher']);
+Route::get('/admin/manageusers/rejected', [adminController::class, 'rejectedTeacher']);
+Route::get('/admin/manageusers/suspend', [adminController::class, 'suspendTeacher']);
+Route::get('/admin/managecourses', [adminController::class, 'showCourses']);
+Route::get('/admin/managecourses/deletecourse', [adminController::class, 'deleteCourse']);
+Route::get('/admin/managetags', [adminController::class, 'showManagetags']);
+Route::get('/admin/managetags/deletecat', [adminController::class, 'deleteCategory']);
+Route::post('/admin/managetags/addcategory', [adminController::class, 'addCategory']);
 
 
 

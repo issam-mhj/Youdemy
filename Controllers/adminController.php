@@ -31,4 +31,73 @@ class adminController extends BaseController
             "lastCourses" => $lastThreeCourses
         ]);
     }
+    public function showManageUsers()
+    {
+        $id = $_SESSION["user"]["id"];
+        $data = $this->adminModel->getAdminData($id);
+        $pteachers = $this->adminModel->getAllPendingTeachersDetails();
+        $allUsers = $this->adminModel->getAllUsers();
+        $this->render('admin/userManagement', [
+            "admin" => $data,
+            "pteachers" => $pteachers,
+            "allUsers" => $allUsers
+        ]);
+    }
+    public function approvedTeacher()
+    {
+        $id = $_GET["id"];
+        $this->adminModel->approveTeacher($id);
+        header("location:/admin/manageusers");
+    }
+    public function rejectedTeacher()
+    {
+        $id = $_GET["id"];
+        $this->adminModel->rejectTeacher($id);
+        header("location:/admin/manageusers");
+    }
+    public function suspendTeacher()
+    {
+        $id = $_GET["id"];
+        $this->adminModel->suspendTeacher($id);
+        header("location:/admin/manageusers");
+    }
+    public function showCourses()
+    {
+        $id = $_SESSION["user"]["id"];
+        $data = $this->adminModel->getAdminData($id);
+        $courses = $this->adminModel->getAllCourses();
+        $this->render("admin/courseManagement", [
+            "admin" => $data,
+            "courses" => $courses
+        ]);
+    }
+    public function deleteCourse()
+    {
+        $id = $_GET["id"];
+        $this->adminModel->deleteCourse($id);
+        header("location:/admin/managecourses");
+    }
+    public function showManagetags()
+    {
+        $id = $_SESSION["user"]["id"];
+        $data = $this->adminModel->getAdminData($id);
+        $categories = $this->adminModel->getCategories();
+        $tags = $this->adminModel->getTags();
+        $this->render("admin/tagcateManage", [
+            "admin" => $data,
+            "categories" => $categories
+        ]);
+    }
+    public function deleteCategory()
+    {
+        $id = $_GET["id"];
+        $this->adminModel->deleteCategory($id);
+        header("location:/admin/managetags");
+    }
+    public function addCategory()
+    {
+        $categoryName = $_POST["categoryName"];
+        $this->adminModel->addCategory($categoryName);
+        header("location:/admin/managetags");
+    }
 }

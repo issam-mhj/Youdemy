@@ -57,6 +57,13 @@ class Admin extends Db
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllPendingTeachersDetails()
+    {
+        $query = "SELECT * FROM users WHERE role = 'Teacher' AND is_approved = 0 ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getCategoriesNum()
     {
         $query = "SELECT COUNT(*) FROM categories ";
@@ -71,8 +78,74 @@ class Admin extends Db
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function lastThreeCourses(){
+    public function lastThreeCourses()
+    {
         $query = "SELECT * FROM courses ORDER BY id DESC LIMIT 3 ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function approveTeacher($id)
+    {
+        $query = "UPDATE users SET is_approved = 1 WHERE users.id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+    }
+    public function rejectTeacher($id)
+    {
+        $query = "DELETE FROM users WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+    }
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM users";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function suspendTeacher($id)
+    {
+        $query = "UPDATE users SET is_approved = 0 WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+    }
+    public function getAllCourses()
+    {
+        $query = "SELECT courses.title,courses.description,courses.category,users.name,courses.created_at,courses.id AS courseID FROM courses JOIN users WHERE users.id = courses.teacher_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function deleteCourse($id)
+    {
+        $query = "DELETE FROM courses WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+    }
+    public function getCategories()
+    {
+        $query = "SELECT categories.name,categories.id, COUNT(courses.id) AS course_count FROM categories LEFT JOIN courses ON categories.name = courses.category
+        GROUP BY categories.name ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function deleteCategory($id)
+    {
+        $query = "DELETE FROM categories WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+    }
+    public function addCategory($categoryName)
+    {
+        $query = "INSERT INTO categories(name) VALUES (?)";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$categoryName]);
+    }
+    public function getTags()
+    {
+        $query = "SELECT * FROM tags";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
