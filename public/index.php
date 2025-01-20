@@ -53,6 +53,9 @@ Route::get('/admin/managecourses/deletecourse', [adminController::class, 'delete
 Route::get('/admin/managetags', [adminController::class, 'showManagetags']);
 Route::get('/admin/managetags/deletecat', [adminController::class, 'deleteCategory']);
 Route::post('/admin/managetags/addcategory', [adminController::class, 'addCategory']);
+Route::get('/admin/managetags/deletetag', [adminController::class, 'deleteTag']);
+Route::post('/admin/managetags/addTag', [adminController::class, 'addTag']);
+Route::get('/admin/statistics', [adminController::class, 'showStats']);
 
 
 

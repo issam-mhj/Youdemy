@@ -85,7 +85,8 @@ class adminController extends BaseController
         $tags = $this->adminModel->getTags();
         $this->render("admin/tagcateManage", [
             "admin" => $data,
-            "categories" => $categories
+            "categories" => $categories,
+            "tags" => $tags
         ]);
     }
     public function deleteCategory()
@@ -99,5 +100,48 @@ class adminController extends BaseController
         $categoryName = $_POST["categoryName"];
         $this->adminModel->addCategory($categoryName);
         header("location:/admin/managetags");
+    }
+    public function addTag()
+    {
+        $tagName = $_POST["tagName"];
+        $this->adminModel->addTag($tagName);
+        header("location:/admin/managetags");
+    }
+    public function deleteTag()
+    {
+        $id = $_GET["id"];
+        $this->adminModel->deleteTag($id);
+        header("location:/admin/managetags");
+    }
+    public function showStats()
+    {
+        $id = $_SESSION["user"]["id"];
+        $allCourses = $this->adminModel->getCoursesAll();
+        $usersNum = $this->adminModel->getStudentNum();
+        $teachersNum = $this->adminModel->getTeachersNum();
+        $categoryNum = $this->adminModel->getCategoriesNum();
+        $categories = $this->adminModel->getCategories();
+        $courses = $this->adminModel->courses();
+        $topTeachers = $this->adminModel->topTeachers();
+        $popularCourse = $courses[0]["studentsNumber"];
+        $pcourse = [];
+        foreach ($courses as $course) {
+            if ($course["studentsNumber"] >= $popularCourse) {
+                $popularCourse = $course["studentsNumber"];
+                $pcourse = $course;
+            }
+        }
+        $this->render(
+            "/admin/statistics",
+            [
+                "courseNum" => $allCourses,
+                "usersNum" => $usersNum,
+                "teacherNum" => $teachersNum,
+                "catNum" => $categoryNum,
+                "categories" => $categories,
+                "courses" => $pcourse,
+                "topTeachers" => $topTeachers
+            ]
+        );
     }
 }

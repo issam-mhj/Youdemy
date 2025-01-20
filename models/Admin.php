@@ -150,4 +150,53 @@ class Admin extends Db
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function deleteTag($id)
+    {
+        $query = "DELETE FROM tags WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+    }
+    public function addTag($tagName)
+    {
+        $query = "INSERT INTO tags(name) VALUES (?)";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$tagName]);
+    }
+    public function getCoursesAll()
+    {
+        $query = "SELECT count(id) FROM courses";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function getStudentNum()
+    {
+        $query = "SELECT COUNT(*) FROM users WHERE role = 'Student'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function getTeachersNum()
+    {
+        $query = "SELECT COUNT(*) FROM users WHERE role = 'Teacher' AND is_approved = 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function courses()
+    {
+        $query = "SELECT * FROM courses";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function topTeachers()
+    {
+        $query = "SELECT COUNT(courses.id) AS teachercourses,users.name,users.email,courses.category,courses.title,courses.studentsNumber,
+        SUM(courses.studentsNumber) AS total_students FROM courses JOIN users ON users.id = courses.teacher_id GROUP BY 
+        users.name,users.email, courses.category, courses.title, courses.studentsNumber ORDER BY total_students DESC LIMIT 3";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

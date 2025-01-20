@@ -32,7 +32,7 @@
                 </svg>
                 Tags & Categories
             </a>
-            <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-700">
+            <a href="/admin/statistics" class="flex items-center px-6 py-3 hover:bg-blue-700">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
@@ -155,80 +155,55 @@
                             Bulk Add Tags
                         </button>
                         <button
+                            id="addTag"
                             class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
                             Add Tag
                         </button>
                     </div>
                 </div>
+                <!-- Add Category Form -->
+                <div id="tagForm" class="hidden bg-gray-50 p-6 rounded-lg shadow">
+                    <h4 class="text-lg font-medium mb-4">Add a New Tag</h4>
+                    <form action="/admin/managetags/addTag" method="POST">
+                        <div class="mb-4">
+                            <label for="tagName" class="block text-sm font-medium text-gray-700">Tag Name</label>
+                            <input type="text" id="tagName" name="tagName" required
+                                class="mt-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" id="cancelTagFormButton"
+                                class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition duration-200">
+                                Cancel
+                            </button>
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
+                                Add Tag
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div
-                        class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-                        <span class="font-medium">Beginner</span>
-                        <button class="text-red-600 hover:text-red-800">
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div
-                        class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-                        <span class="font-medium">Intermediate</span>
-                        <button class="text-red-600 hover:text-red-800">
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div
-                        class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-                        <span class="font-medium">Advanced</span>
-                        <button class="text-red-600 hover:text-red-800">
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div
-                        class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
-                        <span class="font-medium">Project-based</span>
-                        <button class="text-red-600 hover:text-red-800">
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                        </button>
-                    </div>
+                    <?php foreach ($tags as $tag): ?>
+                        <div
+                            class="flex items-center justify-between bg-gray-50 rounded-lg p-4">
+                            <span class="font-medium"><?= $tag["name"] ?></span>
+                            <a
+                                href="/admin/managetags/deletetag?id=<?= $tag["id"]; ?>"
+                                class="text-red-600 hover:text-red-800">
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </a>
+                        </div>
+                    <?php endforeach ?>
                 </div>
             </div>
         </main>
@@ -240,6 +215,9 @@
     const showFormButton = document.getElementById('showCategoryFormButton');
     const cancelFormButton = document.getElementById('cancelCategoryFormButton');
     const categoryForm = document.getElementById('categoryForm');
+    const showFormButtonTag = document.getElementById('addTag');
+    const cancelFormButtonTag = document.getElementById('cancelTagFormButton');
+    const tagForm = document.getElementById('tagForm');
 
     showFormButton.addEventListener('click', () => {
         categoryForm.classList.remove('hidden');
@@ -247,6 +225,13 @@
 
     cancelFormButton.addEventListener('click', () => {
         categoryForm.classList.add('hidden');
+    });
+    showFormButtonTag.addEventListener('click', () => {
+        tagForm.classList.remove('hidden');
+    });
+
+    cancelFormButtonTag.addEventListener('click', () => {
+        tagForm.classList.add('hidden');
     });
 </script>
 
