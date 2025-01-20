@@ -137,9 +137,20 @@
 
                     <!-- Course Content -->
                     <div>
+                        <select
+                            id="iscontent"
+                            name="typecontent"
+                            required
+                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">content type</option>
+                            <option value="video">video</option>
+                            <option value="document">document</option>
+                        </select>
+                    </div>
+                    <div>
                         <label
                             for="content"
-                            class="block text-sm font-medium text-gray-700">Content URL (Video or Document)</label>
+                            class="block text-sm font-medium text-gray-700">Content URL</label>
                         <input
                             type="url"
                             id="content"

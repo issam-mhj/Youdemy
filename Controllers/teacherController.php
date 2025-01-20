@@ -54,11 +54,20 @@ class teacherController extends BaseController
         $description = $_POST["description"];
         $contentURL = $_POST["content"];
         $category = $_POST["category"];
+        $typecontent = $_POST["typecontent"];
         $tags = $_POST["tags"];
         $duration = $_POST["duration"];
         $duration = strval($duration);
-        $this->courseVidModel->addCourse($title, $description, $contentURL, $category, $id, $duration);
-        header("location:/mycourses");
+        $this->courseModel->addCourse($title, $description, $category, $id, $duration);
+        $idcontent = $this->courseModel->getidcourse($id, $title, $description);
+        if ($typecontent === "document") {
+            $course = new DocumentContent($contentURL);
+            $course->save($idcontent["id"]);
+        } else {
+            $course = new VideoContent($contentURL);
+            $course->save($idcontent["id"]);
+        }
+        header("location:/profCourses");
     }
     public function showManageStudents()
     {
