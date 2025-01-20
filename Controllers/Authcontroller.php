@@ -62,7 +62,7 @@ class Authcontroller extends BaseController
                 } else if ($isCorrect["role"] == "Student") {
                     header("location:/");
                 } else {
-                    echo "welcome mr admin";
+                    header("location:/admin");
                 }
             } else {
                 echo "wrong email or password";

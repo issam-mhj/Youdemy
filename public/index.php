@@ -4,6 +4,7 @@ require_once "../Controllers/Authcontroller.php";
 require_once('../Controllers/BaseController.php');
 require_once('../Controllers/studentController.php');
 require_once('../Controllers/teacherController.php');
+require_once('../Controllers/adminController.php');
 require_once('../models/Admin.php');
 require_once('../models/Student.php');
 require_once('../models/Teacher.php');
@@ -41,6 +42,17 @@ Route::post('/mycourses/addNewCourse', [teacherController::class, 'addCourse']);
 Route::get('/managestudents', [teacherController::class, 'showManageStudents']);
 Route::get('/managestudents/accepted', [teacherController::class, 'acceptRequest']);
 Route::get('/managestudents/rejected', [teacherController::class, 'rejectRequest']);
+Route::get('/statistics', [teacherController::class, 'showStats']);
+Route::get('/admin', [adminController::class, 'dashboard']);
+Route::get('/admin/manageusers', [adminController::class, 'showManageUsers']);
+Route::get('/admin/manageusers/approved', [adminController::class, 'approvedTeacher']);
+Route::get('/admin/manageusers/rejected', [adminController::class, 'rejectedTeacher']);
+Route::get('/admin/manageusers/suspend', [adminController::class, 'suspendTeacher']);
+Route::get('/admin/managecourses', [adminController::class, 'showCourses']);
+Route::get('/admin/managecourses/deletecourse', [adminController::class, 'deleteCourse']);
+Route::get('/admin/managetags', [adminController::class, 'showManagetags']);
+Route::get('/admin/managetags/deletecat', [adminController::class, 'deleteCategory']);
+Route::post('/admin/managetags/addcategory', [adminController::class, 'addCategory']);
 
 
 
