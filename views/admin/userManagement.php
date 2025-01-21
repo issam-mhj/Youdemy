@@ -53,14 +53,15 @@
                     </button>
                     <h2 class="text-xl font-semibold">User Management</h2>
                 </div>
-                <div class="flex items-center">
-                    <button class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200">
-                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white font-bold">
+                <div class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white font-bold">
 
-                            <?= $admin[0]["name"][0]; ?>
-                        </div>
-                        <span class="hidden md:inline text-sm font-medium text-gray-800"><?= $admin[0]["name"]; ?></span>
-                    </button>
+                        <?= $admin[0]["name"][0]; ?>
+                    </div>
+                    <span class="hidden md:inline text-sm font-medium text-gray-800">
+                        <div><?= $admin[0]["name"]; ?></div>
+                        <a href="/logout" class="text-red-500">log out</a>
+                    </span>
                 </div>
             </div>
         </header>

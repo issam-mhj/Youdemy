@@ -86,7 +86,7 @@
                                 d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-                    <h2 class="text-xl font-semibold">Create New Course</h2>
+                    <h2 class="text-xl font-semibold">Edit your course</h2>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button
@@ -105,7 +105,7 @@
         <main class="flex-1 overflow-y-auto bg-gray-50 p-6">
             <form
                 id="courseForm"
-                action="/mycourses/addNewCourse"
+                action="/mycourses/modifyCourse"
                 method="post"
                 class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-6">
                 <div class="space-y-6">
@@ -118,7 +118,7 @@
                             type="text"
                             id="title"
                             name="title"
-                            required
+                            value="<?= $course[0]["title"] ?>"
                             class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                     </div>
 
@@ -131,32 +131,7 @@
                             id="description"
                             name="description"
                             rows="4"
-                            required
-                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
-                    </div>
-
-                    <!-- Course Content -->
-                    <div>
-                        <select
-                            id="iscontent"
-                            name="typecontent"
-                            required
-                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">content type</option>
-                            <option value="video">video</option>
-                            <option value="document">document</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label
-                            for="content"
-                            class="block text-sm font-medium text-gray-700">Content URL</label>
-                        <input
-                            type="url"
-                            id="content"
-                            name="content"
-                            required
-                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"><?= $course[0]["description"] ?></textarea>
                     </div>
                     <div>
                         <label
@@ -166,49 +141,30 @@
                             type="number"
                             id="duration"
                             name="duration"
-                            required
+                            value="<?= $course[0]["duration"][0] ?>"
                             class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                     </div>
-
-                    <!-- Course Category -->
-                    <div>
-                        <label
-                            for="category"
-                            class="block text-sm font-medium text-gray-700">Category</label>
-                        <select
-                            id="category"
-                            name="category"
-                            required
-                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Select a category</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?= $category["name"] ?>"><?= $category["name"] ?></option>
-                            <?php endforeach ?>
-                        </select>
-                    </div>
+                    <input type="text" name="id" class="hidden" value="<?= $course[0]["id"] ?>">
 
                     <!-- Course Tags -->
                     <div>
                         <label
                             for="tags"
-                            class="block text-sm font-medium text-gray-700">tags</label>
-                        <select
+                            class="block text-sm font-medium text-gray-700">Tags</label>
+                        <div class="mt-1 flex flex-wrap gap-2" id="selectedTags"></div>
+                        <input
+                            type="text"
                             id="tags"
                             name="tags"
-                            required
-                            class="mt-1 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="">Select a tag</option>
-                            <?php foreach ($tags as $tag): ?>
-                                <option value="<?= $tag["name"] ?>"><?= $tag["name"] ?></option>
-                            <?php endforeach ?>
-                        </select>
+                            class="mt-2 block w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Type a tag and press Enter" />
                     </div>
                     <!-- Submit Button -->
                     <div class="flex justify-end">
                         <button
                             type="submit"
                             class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">
-                            Create Course
+                            Modify Course
                         </button>
                     </div>
                 </div>

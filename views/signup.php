@@ -78,6 +78,7 @@
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                             <option value="Student">Étudiant</option>
                             <option value="Teacher">Enseignant</option>
+                            <option value="Teacher">Admin</option>
                         </select>
                     </div>
                 </div>

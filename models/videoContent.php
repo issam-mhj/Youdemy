@@ -36,13 +36,12 @@ class VideoContent extends Content
         $this->conn->commit();
     }
 
-    //     public function display($courseId)
-    //     {
-    //         $sql = "SELECT title , DESCRIPTION , TYPE , video_url FROM courses
-    // INNER JOIN contents ON courses.id = contents.course_id
-    // INNER JOIN video_contents ON contents.id = video_contents.content_id
-    // WHERE courses.id = ?";
-
-    //         $result = $this->db->fetch($sql, [$courseId]);
-    //     }
+    public function display($courseId)
+    {
+        $sql = "SELECT * FROM contents JOIN courses ON contents.course_id = courses.id 
+                JOIN video_contents ON video_contents.content_id = contents.id WHERE contents.course_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$courseId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

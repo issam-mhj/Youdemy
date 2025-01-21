@@ -49,38 +49,21 @@
             <div class="px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center">
                     <button class="md:hidden mr-4">
-                        <svg
-                            class="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-                    <h2 class="text-xl font-semibold">statistics</h2>
+                    <h2 class="text-xl font-semibold">User Management</h2>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input
-                            type="text"
-                            placeholder="Search courses..."
-                            class="w-64 pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        <svg
-                            class="w-5 h-5 text-gray-400 absolute left-3 top-2.5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                <div class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white font-bold">
+
+                        <?= $admin[0]["name"][0]; ?>
                     </div>
+                    <span class="hidden md:inline text-sm font-medium text-gray-800">
+                        <div><?= $admin[0]["name"]; ?></div>
+                        <a href="/logout" class="text-red-500">log out</a>
+                    </span>
                 </div>
             </div>
         </header>

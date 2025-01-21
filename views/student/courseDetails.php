@@ -45,8 +45,10 @@
                 <!-- Course Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pt-6 border-t border-gray-100">
                     <div class="flex flex-col">
-                        <span class="text-lg font-bold text-gray-900">12 Modules</span>
-                        <span class="text-sm text-gray-600">Comprehensive curriculum</span>
+                        <span class="text-lg font-bold text-gray-900">tags</span>
+                        <?php foreach ($tags as $tag): ?>
+                            <span class="text-sm text-blue-600"><?= $tag["tag"] ?></span>
+                        <?php endforeach ?>
                     </div>
 
                     <div class="flex flex-col">
@@ -72,31 +74,115 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Navigation Tabs -->
             <div class="bg-white rounded-lg shadow-sm">
                 <nav class="flex space-x-8 px-6">
-                    <button class="px-4 py-5 text-blue-600 border-b-2 border-blue-600 font-medium">
+                    <button id="overviewTab" class="px-4 py-5 text-blue-600 border-b-2 border-blue-600 font-medium">
                         Overview
                     </button>
-                    <button class="px-4 py-5 text-gray-500 hover:text-gray-700 font-medium">
-                        Modules
+                    <button id="courseTab" class="px-4 py-5 text-gray-500 hover:text-gray-700 font-medium">
+                        Documents
                     </button>
-                    <button class="px-4 py-5 text-gray-500 hover:text-gray-700 font-medium">
-                        Reviews
-                    </button>
-                    <button class="px-4 py-5 text-gray-500 hover:text-gray-700 font-medium">
-                        Resources
+                    <button id="VidTab" class="px-4 py-5 text-gray-500 hover:text-gray-700 font-medium">
+                        Video
                     </button>
                 </nav>
             </div>
 
-            <!-- Content Section -->
-            <div class="bg-white rounded-xl shadow-sm p-8">
-                <p class="text-gray-700">Course overview content goes here.</p>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+                <!-- Overview Section -->
+                <section id="overview">
+                    <div id="overviewDet" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 sm:p-8">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Overview</h2>
+                        <p class="text-gray-700 leading-relaxed"><?= $course[0]["description"] ?></p>
+                    </div>
+                </section>
+
+                <!-- Course Documents Section -->
+                <section id="course">
+                    <div id="courseDet" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 sm:p-8 hidden">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Course Documents</h2>
+                        <?php if (empty($doc)): ?>
+                            <div class="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
+                                <p class="text-gray-500 text-lg">No documents available</p>
+                            </div>
+                        <?php else: ?>
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe
+                                    src="<?= $doc[0]["file_path"] ?>"
+                                    class="w-full h-full rounded-lg"
+                                    frameborder="0"></iframe>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </section>
+
+                <!-- Video Section -->
+                <section id="video">
+                    <div id="videoDet" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6 sm:p-8 hidden">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Course Videos</h2>
+                        <?php if (empty($vid)): ?>
+                            <div class="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
+                                <p class="text-gray-500 text-lg">No videos available</p>
+                            </div>
+                        <?php else: ?>
+                            <div class="aspect-w-16 aspect-h-[500px]">
+                                <iframe
+                                    src="<?= $vid[0]["video_url"] ?>"
+                                    class="w-full h-[500px] rounded-lg"
+                                    frameborder="0"></iframe>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </section>
             </div>
+
+            <script>
+                const overviewTab = document.getElementById("overviewTab");
+                const courseTab = document.getElementById("courseTab");
+                const vidTab = document.getElementById("VidTab");
+                const overviewDet = document.getElementById("overviewDet");
+                const courseDet = document.getElementById("courseDet");
+                const videoDet = document.getElementById("videoDet");
+
+                overviewTab.addEventListener("click", function() {
+                    overviewDet.classList.remove("hidden");
+                    courseDet.classList.add("hidden");
+                    videoDet.classList.add("hidden");
+
+                    overviewTab.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+                    overviewTab.classList.remove("text-gray-500");
+                    courseTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                    courseTab.classList.add("text-gray-500");
+                    vidTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                    vidTab.classList.add("text-gray-500");
+                });
+
+                courseTab.addEventListener("click", function() {
+                    courseDet.classList.remove("hidden");
+                    overviewDet.classList.add("hidden");
+                    videoDet.classList.add("hidden");
+
+                    courseTab.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+                    courseTab.classList.remove("text-gray-500");
+                    overviewTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                    overviewTab.classList.add("text-gray-500");
+                    vidTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                    vidTab.classList.add("text-gray-500");
+                });
+                vidTab.addEventListener("click", function() {
+                    courseDet.classList.add("hidden");
+                    overviewDet.classList.add("hidden");
+                    videoDet.classList.remove("hidden");
+
+                    courseTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                    courseTab.classList.add("text-gray-500");
+                    overviewTab.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+                    overviewTab.classList.add("text-gray-500");
+                    vidTab.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+                    vidTab.classList.remove("text-gray-500");
+                });
+            </script>
         </div>
     </div>
-
 
     <?php require_once "../views/partials/footerStudent.php" ?>

@@ -44,41 +44,25 @@
             <div class="px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center">
                     <button class="md:hidden mr-4">
-                        <svg
-                            class="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-                    <h2 class="text-xl font-semibold">Student Management</h2>
+                    <h2 class="text-xl font-semibold">Manage students</h2>
                 </div>
                 <div class="flex items-center">
-                    <div class="relative">
-                        <input
-                            type="text"
-                            id="searchStudent"
-                            placeholder="Search students..."
-                            class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                        <svg
-                            class="w-5 h-5 absolute left-3 top-2.5 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                    <div
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        aria-label="View teacher profile">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white font-bold">
+                            <?= strtoupper($teachers[0]["name"][0]) ?>
+                        </div>
+                        <span class="hidden md:inline text-sm font-medium text-gray-800">
+                            <div><?= htmlspecialchars($teachers[0]["name"], ENT_QUOTES, 'UTF-8') ?></div>
+                            <a href="/logout" class="text-red-500">log out</a>
+                        </span>
                     </div>
                 </div>
-            </div>
         </header>
 
         <!-- Main Content Area -->

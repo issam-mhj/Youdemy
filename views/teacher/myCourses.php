@@ -76,72 +76,35 @@
             <div class="px-6 py-4 flex justify-between items-center">
                 <div class="flex items-center">
                     <button class="md:hidden mr-4">
-                        <svg
-                            class="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
-                    <h2 class="text-xl font-semibold">My Courses</h2>
+                    <h2 class="text-xl font-semibold">Mycourses</h2>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="mycourses/addNewCourse"
-                        class="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
-                        <svg
-                            class="w-5 h-5 mr-2"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        Add New Course
-                    </a>
-                    <button
-                        class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200">
-                        <div
-                            class="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white font-bold">
-                            T
+                <div class="flex items-center">
+                    <div
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        aria-label="View teacher profile">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white font-bold">
+                            <?= strtoupper($teachers[0]["name"][0]) ?>
                         </div>
-                        <span class="hidden md:inline text-sm font-medium text-gray-800">Teacher Name</span>
-                    </button>
+                        <span class="hidden md:inline text-sm font-medium text-gray-800">
+                            <div><?= htmlspecialchars($teachers[0]["name"], ENT_QUOTES, 'UTF-8') ?></div>
+                            <a href="/logout" class="text-red-500">log out</a>
+                        </span>
+                    </div>
                 </div>
-            </div>
         </header>
 
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-6">
             <!-- Course Filters -->
-            <div class="mb-6 flex flex-wrap gap-4">
-                <div class="flex-1 min-w-[200px]">
-                    <input
-                        type="text"
-                        placeholder="Search courses..."
-                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                </div>
-                <select
-                    class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option value="">All Categories</option>
-                    <option value="web">Web Development</option>
-                    <option value="mobile">Mobile Development</option>
-                    <option value="design">Design</option>
-                </select>
-                <select
-                    class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option value="">Sort By</option>
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                    <option value="popular">Most Popular</option>
-                </select>
+            <div class="flex justify-center my-6">
+                <a href="/mycourses/addNewCourse"
+                    class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md text-lg font-medium hover:bg-blue-600 transition duration-300">
+                    Add a Course
+                </a>
             </div>
 
             <!-- Course Grid -->
@@ -193,7 +156,7 @@
                                 <span
                                     class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"> <?= $course['category'] ?> </span>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 text-gray-500 hover:text-blue-600">
+                                    <a href="profCourses/edit?id=<?= $course['id'] ?>" class="p-2 text-gray-500 hover:text-blue-600">
                                         <svg
                                             class="w-5 h-5"
                                             fill="none"
@@ -205,8 +168,8 @@
                                                 stroke-width="2"
                                                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                         </svg>
-                                    </button>
-                                    <button class="p-2 text-gray-500 hover:text-red-600">
+                                    </a>
+                                    <a href="profCourses/deleted?id=<?= $course['id'] ?>" onclick="confirm('are you sure ? ')" class="p-2 cursor-pointer text-gray-500 hover:text-red-600">
                                         <svg
                                             class="w-5 h-5"
                                             fill="none"
@@ -218,7 +181,7 @@
                                                 stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                         </svg>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

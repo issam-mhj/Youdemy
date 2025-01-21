@@ -14,8 +14,23 @@
 
 <!-- Courses Section -->
 <div class="max-w-7xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold mb-8">Cours populaires</h2>
-
+    <h2 class="text-3xl font-bold mb-8">Our Courses </h2>
+    <br>
+    <form method="GET" class="mb-8">
+        <div class="max-w-xl mx-auto flex gap-4">
+            <input
+                type="text"
+                name="search"
+                placeholder="Search courses..."
+                class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+            <button
+                type="submit"
+                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Search
+            </button>
+        </div>
+    </form>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Course Card Template -->
         <?php foreach ($courses as $course) : ?>

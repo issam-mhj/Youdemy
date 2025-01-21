@@ -39,13 +39,21 @@ class teacherController extends BaseController
     public function showCourses()
     {
         $id = $_SESSION["user"]["id"];
+        $teacher = $this->teacherModel->teacherInfo($id);
         $courses = $this->teacherModel->allCourses($id);
-        $this->render("teacher/myCourses", ["myCourses" => $courses]);
+        $this->render("teacher/myCourses", [
+            "teachers" => $teacher,
+            "myCourses" => $courses
+        ]);
     }
     public function showAddCourse()
     {
         $categories = $this->teacherModel->getAllCategories();
-        $this->render("teacher/addCourse", ["categories" => $categories]);
+        $tags = $this->teacherModel->getAllTags();
+        $this->render("teacher/addCourse", [
+            "categories" => $categories,
+            "tags"=> $tags
+        ]);
     }
     public function addCourse()
     {
@@ -72,9 +80,10 @@ class teacherController extends BaseController
     public function showManageStudents()
     {
         $id = $_SESSION["user"]["id"];
+        $teacher = $this->teacherModel->teacherInfo($id);
         $requests = $this->teacherModel->getRequests($id);
         $enrolled = $this->teacherModel->getEnrolled($id);
-        $this->render("teacher/managestudents", ["requests" => $requests, "enrolled" => $enrolled]);
+        $this->render("teacher/managestudents", ["requests" => $requests, "teachers" => $teacher, "enrolled" => $enrolled]);
     }
     public function acceptRequest()
     {
@@ -92,6 +101,7 @@ class teacherController extends BaseController
     {
         $id = $_SESSION["user"]["id"];
         $allCourses = $this->teacherModel->coursesNum($id);
+        $teacher = $this->teacherModel->teacherInfo($id);
         $allStudents = $this->teacherModel->studentNum($id);
         $myCourses = $this->teacherModel->allCourses($id);
         $result = 0;
@@ -100,6 +110,26 @@ class teacherController extends BaseController
         }
         $avrgStudents = $result / $allCourses["num"];
         $lastEnrolled = $this->teacherModel->getLastEnrolled($id);
-        $this->render("teacher/statistiques", ["num" => $result, "lastEnrolled" => $lastEnrolled, "mycourses" => $myCourses, "avg" => $avrgStudents, "courses" => $allCourses["num"]]);
+        $this->render("teacher/statistiques", ["teachers" => $teacher, "num" => $result, "lastEnrolled" => $lastEnrolled, "mycourses" => $myCourses, "avg" => $avrgStudents, "courses" => $allCourses["num"]]);
+    }
+    public function deleteCourse()
+    {
+        $id = $_GET["id"];
+        $this->teacherModel->deleteCourse($id);
+        header("location:/profCourses");
+    }
+    public function showEdit()
+    {
+        $id = $_GET["id"];
+        $course = $this->teacherModel->courseInfo($id);
+        $this->render("teacher/modifyCourse", ["course" => $course]);
+    }
+    public function modifyCourse()
+    {
+        $id = $_POST["id"];
+        $title = $_POST["title"];
+        $description = $_POST["description"];
+        $this->teacherModel->updateCourse($title, $description, $id);
+        header("location:/profCourses");
     }
 }

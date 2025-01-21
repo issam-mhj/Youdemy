@@ -34,13 +34,12 @@ class DocumentContent extends Content
 
         $this->conn->commit();
     }
-    // public function display($courseId)
-    // {
-    //     $sql = "SELECT title , DESCRIPTION , TYPE , file_path FROM courses
-    //     INNER JOIN contents ON courses.id = contents.course_id
-    //     INNER JOIN document_contents ON contents.id = document_contents.content_id
-    //     WHERE courses.id = ?";
-
-    //     return $this->Db->fetch($sql, [$courseId]);
-    // }
+    public function display($courseId)
+    {
+        $sql = "SELECT * FROM contents JOIN courses ON contents.course_id = courses.id 
+                JOIN document_contents ON document_contents.content_id = contents.id WHERE contents.course_id = ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$courseId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

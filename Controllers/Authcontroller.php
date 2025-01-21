@@ -65,8 +65,15 @@ class Authcontroller extends BaseController
                     header("location:/admin");
                 }
             } else {
+                header("location:/login");
                 echo "wrong email or password";
             }
         }
+    }
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        header("location:/login");
     }
 }

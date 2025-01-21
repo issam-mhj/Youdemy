@@ -11,7 +11,7 @@
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                 </svg>
-                Dashboard
+                Statistics
             </a>
             <a href="/profCourses" class="flex items-center px-6 py-3 hover:bg-blue-700">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,10 +38,30 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         <!-- Header -->
         <header class="bg-white shadow">
-            <div class="px-6 py-4">
-                <h2 class="text-xl font-semibold">Course Statistics</h2>
-            </div>
+            <div class="px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <button class="md:hidden mr-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <h2 class="text-xl font-semibold">Statistics</h2>
+                </div>
+                <div class="flex items-center">
+                    <div
+                        class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        aria-label="View teacher profile">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white font-bold">
+                            <?= strtoupper($teachers[0]["name"][0]) ?>
+                        </div>
+                        <span class="hidden md:inline text-sm font-medium text-gray-800">
+                            <div><?= htmlspecialchars($teachers[0]["name"], ENT_QUOTES, 'UTF-8') ?></div>
+                            <a href="/logout" class="text-red-500">log out</a>
+                        </span>
+                    </div>
+                </div>
         </header>
+
 
         <!-- Statistics Content -->
         <main class="flex-1 overflow-y-auto p-6">

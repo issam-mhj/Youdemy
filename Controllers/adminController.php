@@ -116,6 +116,7 @@ class adminController extends BaseController
     public function showStats()
     {
         $id = $_SESSION["user"]["id"];
+        $data = $this->adminModel->getAdminData($id);
         $allCourses = $this->adminModel->getCoursesAll();
         $usersNum = $this->adminModel->getStudentNum();
         $teachersNum = $this->adminModel->getTeachersNum();
@@ -134,6 +135,7 @@ class adminController extends BaseController
         $this->render(
             "/admin/statistics",
             [
+                "admin" => $data,
                 "courseNum" => $allCourses,
                 "usersNum" => $usersNum,
                 "teacherNum" => $teachersNum,
